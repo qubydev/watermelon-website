@@ -54,12 +54,32 @@ const products = [
   },
 ]
 
+function ProductShowcase({ firstId }: { firstId?: string }) {
+  return (
+    <div className="grid gap-4">
+      {products.map((product, index) => (
+        <div
+          className="overflow-hidden rounded-none"
+          id={index === 0 ? firstId : undefined}
+          key={product.name}
+        >
+          <img
+            className="block h-auto w-full rounded-none"
+            src={product.image}
+            alt={`${product.name} dashboard preview`}
+          />
+        </div>
+      ))}
+    </div>
+  )
+}
+
 export default function Home() {
   return (
-    <main className="relative z-[1] flex h-screen overflow-hidden bg-background">
-      <section className="left-panel-grid relative flex h-full w-120 shrink-0 flex-col overflow-hidden bg-background px-8 py-10" aria-label="Agency panel">
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-brand/60 via-brand/20 to-transparent" aria-hidden="true" />
-        <div className="absolute inset-x-0 -bottom-6 h-20 bg-gradient-to-t from-foreground/90 via-foreground/25 to-transparent blur-lg" aria-hidden="true" />
+    <main className="relative z-[1] flex min-h-screen bg-background md:h-screen md:overflow-hidden">
+      <section className="left-panel-grid relative flex min-h-screen w-full flex-col overflow-visible bg-background px-5 py-8 sm:px-8 md:h-full md:w-120 md:shrink-0 md:overflow-hidden md:py-10" aria-label="Agency panel">
+        <div className="absolute inset-x-0 bottom-0 hidden h-48 bg-gradient-to-t from-brand/60 via-brand/20 to-transparent md:block" aria-hidden="true" />
+        <div className="absolute inset-x-0 -bottom-6 hidden h-20 bg-gradient-to-t from-foreground/90 via-foreground/25 to-transparent blur-lg md:block" aria-hidden="true" />
         <div className="relative flex flex-1 flex-col">
           <div>
             <div className="mb-4 inline-flex items-center gap-2 border bg-card px-4 py-1.5 text-xs font-bold tracking-widest text-primary uppercase">
@@ -118,9 +138,13 @@ export default function Home() {
                 <div className="mt-1 text-xs leading-4 font-semibold tracking-widest text-muted-foreground uppercase">Visitors</div>
               </div>
             </div>
+
+            <div className="mt-8 md:hidden" aria-label="Product showcase">
+              <ProductShowcase />
+            </div>
           </div>
         </div>
-        <div className="relative flex shrink-0 items-center justify-between pt-6">
+        <div className="relative flex shrink-0 flex-col items-start gap-4 pt-10 sm:flex-row sm:items-center sm:justify-between sm:gap-0 md:pt-6">
           <a className="flex items-center gap-3" href="https://ui.watermelon.sh/" aria-label="Watermelon UI home">
             <img className="h-7 w-11 object-contain" src="/favicon.svg" alt="" aria-hidden="true" />
             <span className="text-lg leading-6 font-bold text-foreground">Watermelon UI</span>
@@ -161,24 +185,10 @@ export default function Home() {
       </section>
 
       <section
-        className="h-full flex-1 overflow-y-auto overscroll-contain bg-background"
+        className="hidden h-full flex-1 overflow-y-auto overscroll-contain bg-background md:block"
         aria-label="Product showcase"
       >
-        <div className="grid min-h-full gap-4">
-          {products.map((product, index) => (
-            <div
-              className="overflow-hidden rounded-none"
-              id={index === 0 ? 'shadow-interviewer' : undefined}
-              key={product.name}
-            >
-              <img
-                className="block h-auto w-full rounded-none"
-                src={product.image}
-                alt={`${product.name} dashboard preview`}
-              />
-            </div>
-          ))}
-        </div>
+        <ProductShowcase firstId="shadow-interviewer" />
       </section>
     </main>
   )
