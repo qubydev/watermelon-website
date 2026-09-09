@@ -81,7 +81,7 @@ body::before {
     inset: 0;
     z-index: 2;
     pointer-events: none;
-    opacity: 0.4;
+    opacity: 0.24;
     mix-blend-mode: soft-light;
     background-image: url("/noise.png");
     background-repeat: repeat;
@@ -89,20 +89,18 @@ body::before {
     background-position: 0 0;
 }
 
-body::after {
+.left-panel-grid::before {
     content: "";
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 110px;
-    z-index: 1;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
     pointer-events: none;
-    backdrop-filter: blur(7px);
-    -webkit-backdrop-filter: blur(7px);
-    background: linear-gradient(180deg, transparent, #0a0a0a66);
-    mask-image: linear-gradient(180deg, transparent, #000 75%);
-    -webkit-mask-image: linear-gradient(180deg, transparent, #000 75%);
+    background-image:
+        linear-gradient(to right, transparent 20px, var(--border) 20px, var(--border) 21px, transparent 21px),
+        linear-gradient(to right, transparent calc(100% - 21px), var(--border) calc(100% - 21px), var(--border) calc(100% - 20px), transparent calc(100% - 20px)),
+        linear-gradient(to bottom, transparent 16px, var(--border) 16px, var(--border) 17px, transparent 17px),
+        linear-gradient(to bottom, transparent calc(100% - 17px), var(--border) calc(100% - 17px), var(--border) calc(100% - 16px), transparent calc(100% - 16px));
+    opacity: 0.45;
 }
 
 @theme inline {
