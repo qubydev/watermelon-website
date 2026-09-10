@@ -87,9 +87,9 @@ function BackedByLogos() {
 export default function Home() {
   return (
     <main className="relative z-[1] flex min-h-screen bg-background md:h-screen md:overflow-hidden">
-      <section className="left-panel-grid relative flex min-h-screen w-full flex-col overflow-visible bg-background px-5 py-8 sm:px-8 md:h-full md:w-120 md:shrink-0 md:overflow-hidden md:py-10" aria-label="Agency panel">
-        <div className="absolute inset-x-0 bottom-0 hidden h-48 bg-gradient-to-t from-primary/60 via-primary/20 to-transparent md:block" aria-hidden="true" />
-        <div className="absolute inset-x-0 -bottom-6 hidden h-20 bg-gradient-to-t from-foreground/90 via-foreground/25 to-transparent blur-lg md:block" aria-hidden="true" />
+      <section className="left-panel-grid relative flex min-h-screen w-full flex-col overflow-hidden bg-background px-5 py-8 sm:px-8 md:h-full md:w-120 md:shrink-0 md:py-10" aria-label="Agency panel">
+        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-primary/60 via-primary/20 to-transparent md:h-48" aria-hidden="true" />
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-foreground/90 via-foreground/25 to-transparent blur-lg md:-bottom-6 md:h-20" aria-hidden="true" />
         <div className="relative flex flex-1 flex-col">
           <div>
             <a className="mb-5 flex items-center gap-2.5 md:hidden" href="https://ui.watermelon.sh/" aria-label="Watermelon Studio home">
