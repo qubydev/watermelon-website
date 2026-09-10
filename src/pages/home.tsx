@@ -3,54 +3,28 @@ import { Mail } from "lucide-react"
 
 const products = [
   {
-    name: 'Agndex Dashboard',
-    image:
-      'https://assets.watermelon.sh/components/agndex-dashboard-thumbnail.png',
+    name: 'Studio Site 1',
+    image: '/showcase/site-1.png',
   },
   {
-    name: 'Astrix Dashboard',
-    image:
-      'https://assets.watermelon.sh/components/astrix-dashboard-thumbnail.png',
+    name: 'Studio Site 2',
+    image: '/showcase/site-2.png',
   },
   {
-    name: 'Bionis Dashboard',
-    image:
-      'https://assets.watermelon.sh/components/bionis-dashboard-thumbnail.png',
+    name: 'Studio Site 1 Variation',
+    image: '/showcase/site-1.png',
   },
   {
-    name: 'Demostack Dashboard',
-    image:
-      'https://assets.watermelon.sh/components/demostack-dashboard-thumbnail.png',
+    name: 'Studio Site 2 Variation',
+    image: '/showcase/site-2.png',
   },
   {
-    name: 'Gridline Dashboard',
-    image:
-      'https://assets.watermelon.sh/components/gridline-dashboard-thumbnail.png',
+    name: 'Studio Site 1 Concept',
+    image: '/showcase/site-1.png',
   },
   {
-    name: 'Jobtracker Dashboard',
-    image:
-      'https://assets.watermelon.sh/components/jobtracker-dashboard-thumbnail.png',
-  },
-  {
-    name: 'Library Dashboard',
-    image:
-      'https://assets.watermelon.sh/components/library-dashboard-thumbnail.png',
-  },
-  {
-    name: 'Medesk Dashboard',
-    image:
-      'https://assets.watermelon.sh/components/medesk-dashboard-thumbnail.png',
-  },
-  {
-    name: 'Portfolio Dashboard',
-    image:
-      'https://assets.watermelon.sh/components/task-management-dashboard.webp',
-  },
-  {
-    name: 'Tallie Dashboard',
-    image:
-      'https://assets.watermelon.sh/components/tallie-dashboard-thumbnail.png',
+    name: 'Studio Site 2 Concept',
+    image: '/showcase/site-2.png',
   },
 ]
 
@@ -74,6 +48,42 @@ function ProductShowcase({ firstId }: { firstId?: string }) {
   )
 }
 
+function BackedByLogos() {
+  const logos = [
+    {
+      name: 'A16z',
+      src: '/logos/a16z.svg',
+    },
+    {
+      name: 'Antler',
+      src: '/logos/antler.svg',
+    },
+    {
+      name: 'Y Combinator',
+      src: '/logos/y-combinator.svg',
+    },
+  ]
+
+  return (
+    <div className="mt-12" aria-label="Founders backed by">
+      <div className="text-xs leading-4 font-semibold tracking-widest text-muted-foreground uppercase">
+        Trusted by VC-backed founders
+      </div>
+      <div className="mt-4 grid grid-cols-3 divide-x divide-border/80 overflow-hidden border border-border/80">
+        {logos.map((logo) => (
+          <div
+            className="flex h-16 items-center justify-center px-4"
+            key={logo.name}
+            aria-label={logo.name}
+          >
+            <img className="h-6 w-full max-w-24 object-contain" src={logo.src} alt="" aria-hidden="true" />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function Home() {
   return (
     <main className="relative z-[1] flex min-h-screen bg-background md:h-screen md:overflow-hidden">
@@ -82,9 +92,15 @@ export default function Home() {
         <div className="absolute inset-x-0 -bottom-6 hidden h-20 bg-gradient-to-t from-foreground/90 via-foreground/25 to-transparent blur-lg md:block" aria-hidden="true" />
         <div className="relative flex flex-1 flex-col">
           <div>
-            <div className="mb-4 inline-flex items-center gap-2 bg-primary/10 px-3 py-1.5 text-[10px] leading-4 font-semibold tracking-widest text-primary uppercase">
-              <span className="size-2 bg-primary" aria-hidden="true" />
-              Open for projects
+            <a className="mb-5 flex items-center gap-2.5 md:hidden" href="https://ui.watermelon.sh/" aria-label="Watermelon Studio home">
+              <img className="h-5 w-8 object-contain" src="/favicon.svg" alt="" aria-hidden="true" />
+              <span className="text-sm leading-5 font-bold text-foreground">Watermelon Studio</span>
+            </a>
+            <div className="mb-4">
+              <div className="inline-flex items-center gap-2 bg-emerald-500/10 px-3 py-1.5 text-[10px] leading-4 font-semibold tracking-widest text-emerald-400 uppercase">
+                <span className="size-2 bg-emerald-500" aria-hidden="true" />
+                Open for projects
+              </div>
             </div>
             <h1 className="text-2xl leading-8 font-bold tracking-normal text-balance text-foreground">
               Designing and shipping standout digital products
@@ -115,26 +131,9 @@ export default function Home() {
                 </svg>
               </Button>
             </div>
-            <div className="mt-8 grid grid-cols-2 gap-2" aria-label="Watermelon stats">
-              <div className="border bg-card px-4 py-3">
-                <div className="text-xl leading-6 font-bold text-foreground">01</div>
-                <div className="mt-1 text-xs leading-4 font-semibold tracking-widest text-muted-foreground uppercase">Strategy</div>
-              </div>
-              <div className="border bg-card px-4 py-3">
-                <div className="text-xl leading-6 font-bold text-foreground">02</div>
-                <div className="mt-1 text-xs leading-4 font-semibold tracking-widest text-muted-foreground uppercase">Design</div>
-              </div>
-              <div className="border bg-card px-4 py-3">
-                <div className="text-xl leading-6 font-bold text-foreground">03</div>
-                <div className="mt-1 text-xs leading-4 font-semibold tracking-widest text-muted-foreground uppercase">Web</div>
-              </div>
-              <div className="border bg-card px-4 py-3">
-                <div className="text-xl leading-6 font-bold text-foreground">04</div>
-                <div className="mt-1 text-xs leading-4 font-semibold tracking-widest text-muted-foreground uppercase">Launch</div>
-              </div>
-            </div>
+            <BackedByLogos />
 
-            <div className="mt-8 md:hidden" aria-label="Product showcase">
+            <div className="mt-12 md:hidden" aria-label="Product showcase">
               <ProductShowcase />
             </div>
           </div>
