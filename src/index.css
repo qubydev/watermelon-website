@@ -75,11 +75,15 @@ body {
     background: linear-gradient(180deg in oklab, #171717, #0a0a0a);
 }
 
-body::before {
+.product-noise {
+    position: relative;
+}
+
+.product-noise::after {
     content: "";
-    position: fixed;
+    position: absolute;
     inset: 0;
-    z-index: 2;
+    z-index: 1;
     pointer-events: none;
     opacity: 0.24;
     mix-blend-mode: soft-light;

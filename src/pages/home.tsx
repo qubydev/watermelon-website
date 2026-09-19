@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button"
+import { SmokeEffect } from "@/components/ui/smoke-effect"
+import { cn } from "@/lib/utils"
 import { Mail } from "lucide-react"
 
 const products = [
@@ -33,7 +35,7 @@ function ProductShowcase({ firstId }: { firstId?: string }) {
     <div className="grid gap-4">
       {products.map((product, index) => (
         <div
-          className="overflow-hidden rounded-none"
+          className="product-noise overflow-hidden rounded-none"
           id={index === 0 ? firstId : undefined}
           key={product.name}
         >
@@ -53,14 +55,32 @@ function BackedByLogos() {
     {
       name: 'A16z',
       src: '/logos/a16z.svg',
+      className: 'h-6 max-w-20',
     },
     {
       name: 'Antler',
       src: '/logos/antler.svg',
+      className: 'h-5 max-w-22',
     },
     {
       name: 'Y Combinator',
       src: '/logos/y-combinator.svg',
+      className: 'h-5 max-w-24',
+    },
+    {
+      name: 'Sequoia Capital',
+      src: '/logos/sequoia.svg',
+      className: 'h-4 max-w-24',
+    },
+    {
+      name: 'Accel',
+      src: '/logos/accel.svg',
+      className: 'h-5 max-w-20',
+    },
+    {
+      name: 'Founders Fund',
+      src: '/logos/founders-fund.svg',
+      className: 'h-4 max-w-24',
     },
   ]
 
@@ -69,14 +89,19 @@ function BackedByLogos() {
       <div className="text-xs leading-4 font-semibold tracking-widest text-muted-foreground uppercase">
         Trusted by VC-backed founders
       </div>
-      <div className="mt-4 grid grid-cols-3 divide-x divide-border/80 overflow-hidden border border-border/80">
+      <div className="mt-4 grid grid-cols-3 border-t border-l border-border/80 overflow-hidden">
         {logos.map((logo) => (
           <div
-            className="flex h-16 items-center justify-center px-4"
+            className="flex h-16 items-center justify-center border-r border-b border-border/80 px-3 py-2"
             key={logo.name}
             aria-label={logo.name}
           >
-            <img className="h-6 w-full max-w-24 object-contain" src={logo.src} alt="" aria-hidden="true" />
+            <img
+              className={cn("w-full object-contain brightness-90 transition-opacity hover:opacity-100", logo.className)}
+              src={logo.src}
+              alt=""
+              aria-hidden="true"
+            />
           </div>
         ))}
       </div>
@@ -88,25 +113,24 @@ export default function Home() {
   return (
     <main className="relative z-[1] flex min-h-screen bg-background md:h-screen md:overflow-hidden">
       <section className="left-panel-grid relative flex min-h-screen w-full flex-col overflow-hidden bg-background px-5 py-8 sm:px-8 md:h-full md:w-120 md:shrink-0 md:py-10" aria-label="Agency panel">
-        <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-primary/60 via-primary/20 to-transparent md:h-48" aria-hidden="true" />
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-foreground/90 via-foreground/25 to-transparent blur-lg md:-bottom-6 md:h-20" aria-hidden="true" />
-        <div className="relative flex flex-1 flex-col">
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-80 overflow-hidden md:h-72"
+          aria-hidden="true"
+        >
+          <SmokeEffect color="#1A73F2" className="h-full w-full" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent" />
+        </div>
+        <div className="relative z-10 flex flex-1 flex-col">
           <div>
-            <a className="mb-5 flex items-center gap-2.5 md:hidden" href="https://ui.watermelon.sh/" aria-label="Watermelon Studio home">
+            <a className="mb-6 flex items-center gap-2.5" href="https://ui.watermelon.sh/" aria-label="Watermelon Studio home">
               <img className="h-5 w-8 object-contain" src="/favicon.svg" alt="" aria-hidden="true" />
-              <span className="text-sm leading-5 font-bold text-foreground">Watermelon Studio</span>
+              <span className="text-base leading-5 font-bold text-foreground">Watermelon Studio</span>
             </a>
-            <div className="mb-4">
-              <div className="inline-flex items-center gap-2 bg-emerald-500/10 px-3 py-1.5 text-[10px] leading-4 font-semibold tracking-widest text-emerald-400 uppercase">
-                <span className="size-2 bg-emerald-500" aria-hidden="true" />
-                Open for projects
-              </div>
-            </div>
             <h1 className="text-2xl leading-8 font-bold tracking-normal text-balance text-foreground">
-              Designing and shipping standout digital products
+              Designing standout digital products and brands
             </h1>
             <p className="mt-4 text-base leading-6 font-medium text-muted-foreground">
-              Watermelon Studio partners with founders and teams to craft websites, apps, and launch-ready brand systems with thoughtful design and precise engineering.
+              We partner with ambitious founders to design and build high-impact websites, apps, and brand systems.
             </p>
             <div className="mt-8 flex gap-2">
               <Button variant="secondary">
@@ -138,7 +162,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="relative flex shrink-0 flex-col items-start gap-4 pt-10 sm:flex-row sm:items-center sm:justify-between sm:gap-0 md:pt-6">
+        <div className="relative z-10 flex shrink-0 flex-col items-start gap-4 pt-10 sm:flex-row sm:items-center sm:justify-between sm:gap-0 md:pt-6">
           <a className="flex items-center gap-3" href="https://ui.watermelon.sh/" aria-label="Watermelon Studio home">
             <img className="h-7 w-11 object-contain" src="/favicon.svg" alt="" aria-hidden="true" />
             <span className="text-lg leading-6 font-bold text-foreground">Watermelon Studio</span>
