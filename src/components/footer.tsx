@@ -31,44 +31,44 @@ const siteLinks = [
 
 export function Footer({ className }: { className?: string }) {
   return (
-    <footer className={`relative z-10 flex shrink-0 flex-col gap-3 pt-6 md:pt-4 ${className ?? ''}`} aria-label="Footer">
+    <footer className={`relative z-10 flex shrink-0 flex-col gap-4 pt-14 sm:pt-16 pb-6 ${className ?? ''}`} aria-label="Footer">
       <div className="flex items-center justify-end">
         <div className="flex items-center gap-2" aria-label="Social and contact links">
           <a
-            className="inline-flex size-7 items-center justify-center border border-border/80 bg-card text-muted-foreground transition-colors hover:text-foreground"
+            className="inline-flex size-8 items-center justify-center border border-border/80 bg-card text-muted-foreground transition-colors hover:text-foreground"
             href="https://x.com/WatermelonUI"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Watermelon Studio on X"
           >
-            <XIcon className="size-3.5" />
+            <XIcon className="size-4" />
           </a>
           <a
-            className="inline-flex size-7 items-center justify-center border border-border/80 bg-card text-muted-foreground transition-colors hover:text-foreground"
+            className="inline-flex size-8 items-center justify-center border border-border/80 bg-card text-muted-foreground transition-colors hover:text-foreground"
             href="https://github.com/WatermelonCorp/watermelon-platform"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Watermelon Studio on GitHub"
           >
-            <GithubIcon className="size-3.5" />
+            <GithubIcon className="size-4" />
           </a>
           <a
-            className="inline-flex size-7 items-center justify-center border border-border/80 bg-card text-muted-foreground transition-colors hover:text-foreground"
+            className="inline-flex size-8 items-center justify-center border border-border/80 bg-card text-muted-foreground transition-colors hover:text-foreground"
             href={`mailto:${CONTACT_EMAIL}`}
             aria-label="Email Watermelon Studio"
           >
-            <Mail className="size-3.5" aria-hidden="true" />
+            <Mail className="size-4" aria-hidden="true" />
           </a>
         </div>
       </div>
-      <div className="flex items-center justify-between">
-        <span className="font-mono text-[11px] leading-4 font-semibold text-zinc-950">
+      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+        <span className="font-mono text-[13px] sm:text-sm leading-5 font-semibold text-zinc-950">
           &copy; {new Date().getFullYear()} Watermelon
         </span>
-        <nav className="flex items-center gap-3.5" aria-label="Site">
+        <nav className="flex items-center gap-4 sm:gap-5" aria-label="Site">
           {siteLinks.map((link) => (
             <Link
-              className="font-mono text-[11px] leading-4 font-semibold tracking-wide text-zinc-950 uppercase transition-colors hover:text-zinc-700"
+              className="font-mono text-[13px] sm:text-sm leading-5 font-semibold tracking-wide text-zinc-950 uppercase transition-opacity hover:opacity-70"
               key={link.to}
               to={link.to}
             >
