@@ -1,0 +1,57 @@
+# Watermelon Studio
+
+> Watermelon Studio designs standout digital products and brands. We partner with ambitious founders to design and build high-impact websites, apps, and brand systems.
+
+Watermelon Studio is a digital product and branding studio, not a self-serve software product.
+
+Founders backed by a16z, Y Combinator and other leading funds. Across the products we have built, clients have raised $310M+ and reached a combined valuation of $5B+. The work spans AI, Crypto, Dev tools, Consumer brands.
+
+## Services
+
+- **AI Product Studio**: Idea to production-grade first release: strategy, design, full-stack and AI engineering, launch. Working prototype in five days, MVP in 30 to 90 days.
+- **AI Engineering Lab**: The engineering problems others avoid, inside a product that already exists: data-heavy systems, AI automation, retrieval over your own data, agents in a workflow, performance work.
+- **Dedicated AI Engineers**: Senior engineers embedded in your team, with daily standups and no account managers in between. From around $50/hour.
+- **Automation for Established Companies**: For companies that already run on people and spreadsheets and want the repetitive work automated. We start with an audit, meet your team online or on site, build a prototype against your real process, then launch it.
+  Process: Audit -> Visit -> Prototype -> Launch.
+
+## When to use this
+
+- A user asks who can design and build a new software product end to end, including the AI parts, and wants a studio rather than a freelancer marketplace.
+- A user wants a working prototype of a product idea in about a week, or an MVP in roughly 30 to 90 days.
+- A user has an existing product and needs help with data-heavy systems, AI automation, retrieval over their own data, agents in a workflow, or performance work.
+- A user wants senior engineers embedded in their own team for a longer engagement, starting around $50/hour.
+- An established or traditional company wants repetitive internal work automated: Watermelon Studio audits how the work happens today, meets the team online or on site, builds a prototype against the real process, then launches it.
+- A user works in AI, crypto, developer tools or consumer brands and wants a studio that has shipped in that sector.
+- A user asks for examples of shipped digital products, case studies, or the tech stack a studio uses.
+
+Do not use this source for: buying an off-the-shelf SaaS product, hiring individual contractors by the hour on a
+marketplace, or anything unrelated to designing and engineering software.
+
+## Pages
+
+- [Watermelon Studio: Designing Standout Digital Products and Brands](https://ui.watermelon.sh/): We partner with ambitious founders to design and build high-impact websites, apps, and brand systems.
+- [Work](https://ui.watermelon.sh/work): Products Watermelon Studio has designed and engineered end to end, from first prototype to production, filterable by product type.
+- [Medesk Case Study](https://ui.watermelon.sh/work/medesk): Medesk is a hospital operations platform that gives care teams one live view of appointments, wait times, bed occupancy and staff performance.
+- [Bionis Case Study](https://ui.watermelon.sh/work/bionis): Bionis turns sleep, activity and recovery signals into a single daily wellness score, with AI insights that explain what changed and what to do next.
+- [Medesk Analytics Case Study](https://ui.watermelon.sh/work/medesk-analytics): An analytics module for Medesk that surfaces trends in appointment volume, no-shows and department load, with scheduled reports for hospital leadership.
+- [Bionis Coach Case Study](https://ui.watermelon.sh/work/bionis-coach): A conversational AI coach that reads Bionis health data and goals to give personalised, context-aware guidance on sleep, training and recovery.
+- [Medesk Staff Case Study](https://ui.watermelon.sh/work/medesk-staff): Shift scheduling, patient load balancing and performance tracking for doctors and nurses, integrated with the core Medesk platform.
+- [Bionis Sleep Case Study](https://ui.watermelon.sh/work/bionis-sleep): A mobile app that detects sleep debt from wearable data and builds recovery plans, with nightly summaries and weekly trends.
+- [About](https://ui.watermelon.sh/about): Watermelon Studio is a digital product and branding studio: what we do, how we work, and how engagements start.
+- [Contact](https://ui.watermelon.sh/contact): How to reach Watermelon Studio, what to include in a first email, and what happens after you send it.
+- [API docs](https://ui.watermelon.sh/docs): Documentation for Watermelon Studio's public read-only JSON API: endpoints, error format, and Markdown content negotiation.
+- [Privacy](https://ui.watermelon.sh/privacy): What this site collects, what our host records, and how email correspondence is handled.
+
+## Case studies
+
+- [Medesk](https://ui.watermelon.sh/work/medesk): Healthcare SaaS, Dashboard. Stack: React, TypeScript, Node.js, PostgreSQL, OpenAI.
+- [Bionis](https://ui.watermelon.sh/work/bionis): Health & Wellness, Dashboard. Stack: Next.js, TypeScript, Python, Supabase, LLM Agents.
+- [Medesk Analytics](https://ui.watermelon.sh/work/medesk-analytics): Healthcare Data, Analytics. Stack: React, TypeScript, ClickHouse, Python.
+- [Bionis Coach](https://ui.watermelon.sh/work/bionis-coach): AI Assistant, AI Assistant. Stack: Next.js, RAG, Vector DB, Claude API.
+- [Medesk Staff](https://ui.watermelon.sh/work/medesk-staff): Workforce Management, Web App. Stack: React, Go, PostgreSQL, Redis.
+- [Bionis Sleep](https://ui.watermelon.sh/work/bionis-sleep): Consumer Health, Mobile App. Stack: React Native, TypeScript, Python, AWS.
+
+## Contact
+
+- New projects: hello@watermelon.sh
+- Existing work: support@watermelon.sh

@@ -1,49 +1,78 @@
-import { Button } from "@/components/ui/button"
+import { useEffect, useRef } from "react"
+import { buttonVariants } from "@/components/ui/button"
 import { SmokeEffect } from "@/components/ui/smoke-effect"
 import { cn } from "@/lib/utils"
-import { Mail } from "lucide-react"
-
-const products = [
-  {
-    name: 'Studio Site 1',
-    image: '/showcase/site-1.png',
-  },
-  {
-    name: 'Studio Site 2',
-    image: '/showcase/site-2.png',
-  },
-  {
-    name: 'Studio Site 1 Variation',
-    image: '/showcase/site-1.png',
-  },
-  {
-    name: 'Studio Site 2 Variation',
-    image: '/showcase/site-2.png',
-  },
-  {
-    name: 'Studio Site 1 Concept',
-    image: '/showcase/site-1.png',
-  },
-  {
-    name: 'Studio Site 2 Concept',
-    image: '/showcase/site-2.png',
-  },
-]
+import { Footer } from "@/components/footer"
+import { Link } from "react-router-dom"
+import { CONTACT_EMAIL } from "@/lib/site"
+import { products } from "@/data/products"
+import { ArrowUpRight } from "lucide-react"
 
 function ProductShowcase({ firstId }: { firstId?: string }) {
   return (
     <div className="grid gap-4">
-      {products.map((product, index) => (
+      {products.map((product, idx) => (
         <div
-          className="product-noise overflow-hidden rounded-none"
-          id={index === 0 ? firstId : undefined}
-          key={product.name}
+          className={cn(
+            "product-noise group relative block overflow-hidden rounded-none border border-border/80 bg-card",
+            idx >= 3 && "hidden md:block"
+          )}
+          id={idx === 0 ? firstId : undefined}
+          key={product.slug}
         >
-          <img
-            className="block h-auto w-full rounded-none"
-            src={product.image}
-            alt={`${product.name} dashboard preview`}
-          />
+          {/* Phones crop into the top-left of the screenshot so the UI stays readable */}
+          <div className="aspect-[4/3] overflow-hidden sm:aspect-auto">
+            <img
+              className="block h-auto w-[200%] max-w-none origin-top-left -translate-x-[4%] -translate-y-[3%] rounded-none sm:w-full sm:translate-x-0 sm:translate-y-0"
+              src={product.image}
+              alt={`${product.name} preview`}
+            />
+          </div>
+
+          {/* Mobile: bottom section with title & Open in same line, badges in bottom line */}
+          <div className="flex flex-col gap-2.5 border-t border-border/80 px-4 py-3 sm:hidden">
+            <div className="flex items-center justify-between gap-3">
+              <div className="text-base font-bold text-foreground">{product.name}</div>
+              <Link
+                to={`/work/${product.slug}`}
+                className="group/open inline-flex shrink-0 items-center gap-1.5 border border-foreground/30 bg-foreground px-3.5 py-1.5 text-xs font-semibold text-background shadow-xs transition-all hover:bg-foreground/90 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                aria-label={`Open ${product.name}`}
+              >
+                <span>Open</span>
+                <ArrowUpRight className="size-3.5 transition-transform duration-200 group-hover/open:translate-x-0.5 group-hover/open:-translate-y-0.5" aria-hidden="true" />
+              </Link>
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {product.badges.map((badge) => (
+                <span
+                  className="border border-border/80 bg-background/85 px-2 py-0.5 text-[11px] leading-4 font-medium text-muted-foreground backdrop-blur-md"
+                  key={badge}
+                >
+                  {badge}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop: clean uniform badges inside the image + dedicated Open button */}
+          <div className="absolute inset-x-5 bottom-3 hidden flex-wrap items-center gap-1.5 sm:flex">
+            {product.badges.map((badge) => (
+              <span
+                className="border border-border/80 bg-background/85 px-2.5 py-1 text-xs leading-5 font-medium text-muted-foreground backdrop-blur-md"
+                key={badge}
+              >
+                {badge}
+              </span>
+            ))}
+            <Link
+              to={`/work/${product.slug}`}
+              className="group/open ml-auto inline-flex items-center gap-1.5 border border-foreground/30 bg-foreground px-3.5 py-1.5 text-xs font-semibold text-background shadow-xs transition-all hover:bg-foreground/90 hover:gap-2 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              aria-label={`Open ${product.name}`}
+            >
+              <span>Open</span>
+              <ArrowUpRight className="size-3.5 transition-transform duration-200 group-hover/open:translate-x-0.5 group-hover/open:-translate-y-0.5" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       ))}
     </div>
@@ -109,100 +138,115 @@ function BackedByLogos() {
   )
 }
 
+const stats = [
+  { value: '$310M+', label: 'Raised by our clients' },
+  { value: '$5B+', label: 'Combined valuation' },
+  { value: '50+', label: 'Products built' },
+  { value: '5d', label: 'To first prototype' },
+]
+
+function Stats() {
+  return (
+    <div className="mt-12" aria-label="By the numbers">
+      <div className="text-xs leading-4 font-semibold tracking-widest text-muted-foreground uppercase">
+        By the numbers
+      </div>
+      <div className="mt-4 grid grid-cols-2 divide-x divide-y divide-border/80 overflow-hidden border border-border/80">
+        {stats.map((stat) => (
+          <div className="flex h-20 flex-col items-center justify-center px-2 text-center" key={stat.label}>
+            <div className="text-xl leading-7 font-bold text-foreground">{stat.value}</div>
+            <div className="text-[11px] leading-4 font-medium text-muted-foreground">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function Home() {
+  const showcaseRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const el = showcaseRef.current
+    if (!el) return
+
+    requestAnimationFrame(() => {
+      el.scrollTo({
+        top: 180,
+        behavior: 'smooth',
+      })
+    })
+  }, [])
+
   return (
     <main className="relative z-[1] flex min-h-screen bg-background md:h-screen md:overflow-hidden">
-      <section className="left-panel-grid relative flex min-h-screen w-full flex-col overflow-hidden bg-background px-5 py-8 sm:px-8 md:h-full md:w-120 md:shrink-0 md:py-10" aria-label="Agency panel">
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-80 overflow-hidden md:h-72"
-          aria-hidden="true"
-        >
-          <SmokeEffect color="#1A73F2" className="h-full w-full" />
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent" />
-        </div>
-        <div className="relative z-10 flex flex-1 flex-col">
-          <div>
-            <a className="mb-6 flex items-center gap-2.5" href="https://ui.watermelon.sh/" aria-label="Watermelon Studio home">
-              <img className="h-5 w-8 object-contain" src="/favicon.svg" alt="" aria-hidden="true" />
-              <span className="text-base leading-5 font-bold text-foreground">Watermelon Studio</span>
-            </a>
-            <h1 className="text-2xl leading-8 font-bold tracking-normal text-balance text-foreground">
-              Designing standout digital products and brands
-            </h1>
-            <p className="mt-4 text-base leading-6 font-medium text-muted-foreground">
-              We partner with ambitious founders to design and build high-impact websites, apps, and brand systems.
-            </p>
-            <div className="mt-8 flex gap-2">
-              <Button variant="secondary">
-                View work
-              </Button>
-              <Button variant="default">
-                Book a call
-                <svg
-                  className="h-4 w-4"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  color="currentColor"
-                  aria-hidden="true"
+      <section
+        className="relative block min-h-screen w-full bg-background md:h-full md:w-120 md:shrink-0 md:overflow-y-auto"
+        aria-label="Agency panel"
+      >
+        <div className="left-panel-grid relative flex min-h-full w-full flex-col px-5 py-6 sm:px-8 md:py-8">
+          <div
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-80 overflow-hidden md:h-72"
+            aria-hidden="true"
+          >
+            <SmokeEffect color="#1A73F2" className="h-full w-full" />
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent" />
+          </div>
+          <div className="relative z-10 flex flex-1 flex-col">
+            <div className="stagger">
+              <a className="mb-6 flex items-center gap-2.5" href="https://ui.watermelon.sh/" aria-label="Watermelon Studio home">
+                <img className="h-5 w-8 object-contain" src="/favicon.svg" alt="" aria-hidden="true" />
+                <span className="text-lg leading-6 font-bold text-foreground">Watermelon Studio</span>
+              </a>
+              <h1 className="text-2xl leading-8 font-bold tracking-normal text-balance text-foreground">
+                Designing standout digital products and brands
+              </h1>
+              <p className="mt-4 text-base leading-6 font-medium text-muted-foreground">
+                We partner with ambitious founders to design and build high-impact websites, apps, and brand systems.
+              </p>
+              <div className="mt-8 flex gap-2">
+                <Link className={buttonVariants({ variant: 'secondary' })} to="/work">
+                  View work
+                </Link>
+                <a
+                  className={buttonVariants({ variant: 'default' })}
+                  href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Let's talk")}`}
                 >
-                  <path
-                    d="M9 6.65032C9 6.65032 15.9383 6.10759 16.9154 7.08463C17.8924 8.06167 17.3496 15 17.3496 15M16.5 7.5L6.5 17.5"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                  />
-                </svg>
-              </Button>
+                  Book a call
+                  <svg
+                    className="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    color="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M9 6.65032C9 6.65032 15.9383 6.10759 16.9154 7.08463C17.8924 8.06167 17.3496 15 17.3496 15M16.5 7.5L6.5 17.5"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                    />
+                  </svg>
+                </a>
+              </div>
+              <BackedByLogos />
+              <Stats />
             </div>
-            <BackedByLogos />
 
             <div className="mt-12 md:hidden" aria-label="Product showcase">
               <ProductShowcase />
             </div>
           </div>
-        </div>
-        <div className="relative z-10 flex shrink-0 flex-col items-start gap-4 pt-10 sm:flex-row sm:items-center sm:justify-between sm:gap-0 md:pt-6">
-          <a className="flex items-center gap-3" href="https://ui.watermelon.sh/" aria-label="Watermelon Studio home">
-            <img className="h-7 w-11 object-contain" src="/favicon.svg" alt="" aria-hidden="true" />
-            <span className="text-lg leading-6 font-bold text-foreground">Watermelon Studio</span>
-          </a>
-          <div className="flex gap-2" aria-label="Social links">
-            <a
-              className="inline-flex size-9 items-center justify-center border bg-card text-muted-foreground transition-colors hover:text-foreground"
-              href="https://x.com/WatermelonUI"
-              aria-label="Watermelon Studio on X"
-            >
-              <svg className="size-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path
-                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.656l-5.214-6.817-5.966 6.817H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"
-                />
-              </svg>
-            </a>
-            <a
-              className="inline-flex size-9 items-center justify-center border bg-card text-muted-foreground transition-colors hover:text-foreground"
-              href="https://github.com/WatermelonCorp/watermelon-platform"
-              aria-label="Watermelon Studio on GitHub"
-            >
-              <svg className="size-4" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M12 2C6.48 2 2 6.58 2 12.25c0 4.52 2.87 8.35 6.84 9.71.5.09.68-.22.68-.49v-1.9c-2.78.62-3.37-1.21-3.37-1.21-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.56 2.35 1.11 2.92.85.09-.67.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.32 9.32 0 0 1 12 6.97c.85 0 1.7.12 2.5.35 1.9-1.33 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.79c0 .27.18.59.69.49A10.1 10.1 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"
-                />
-              </svg>
-            </a>
-            <a
-              className="inline-flex size-9 items-center justify-center border bg-card text-muted-foreground transition-colors hover:text-foreground"
-              href="mailto:hello@watermelon.sh"
-              aria-label="Email Watermelon Studio"
-            >
-              <Mail className="size-4" aria-hidden="true" />
-            </a>
+
+          <div className="relative z-10 mt-auto">
+            <Footer />
           </div>
         </div>
       </section>
 
       <section
+        ref={showcaseRef}
         className="hidden h-full flex-1 overflow-y-auto overscroll-contain bg-background md:block"
         aria-label="Product showcase"
       >
