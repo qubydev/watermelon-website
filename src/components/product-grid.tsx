@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react"
 import type { Product } from "@/data/products"
 import { cn } from "@/lib/utils"
 import { ArrowUpRight } from "lucide-react"
@@ -10,24 +11,40 @@ export function ProductCard({
   product: Product
   className?: string
 }) {
+  const imgRef = useRef<HTMLImageElement>(null)
+  const [loaded, setLoaded] = useState(false)
+
+  useEffect(() => {
+    if (imgRef.current?.complete && imgRef.current?.naturalWidth > 0) {
+      setLoaded(true)
+    }
+  }, [product.image])
+
   return (
     <div
       className={cn(
-        "product-noise group relative block overflow-hidden rounded-none border border-border/80 bg-card",
+        "product-noise group relative block overflow-hidden rounded-none border-0 bg-card",
         className
       )}
     >
       {/* Phones crop into the top-left of the screenshot so the UI stays readable */}
-      <div className="block aspect-[4/3] overflow-hidden sm:aspect-auto">
+      <div className="block aspect-[4/3] overflow-hidden border-0 sm:aspect-[16/10]">
         <img
-          className="block h-auto w-[200%] max-w-none origin-top-left -translate-x-[4%] -translate-y-[3%] rounded-none sm:w-full sm:translate-x-0 sm:translate-y-0"
+          ref={imgRef}
+          className={cn(
+            "block h-auto w-[200%] max-w-none origin-top-left -translate-x-[4%] -translate-y-[3%] rounded-none border-0 border-none outline-none transition-opacity duration-300 sm:h-full sm:w-full sm:object-cover sm:translate-x-0 sm:translate-y-0",
+            loaded ? "opacity-100" : "opacity-0"
+          )}
           src={product.image}
           alt=""
+          loading="lazy"
+          onLoad={() => setLoaded(true)}
+          onError={() => setLoaded(false)}
         />
       </div>
 
       {/* Mobile: just name on left and open button on right */}
-      <div className="flex items-center justify-between gap-3 border-t border-border/80 bg-white/[0.03] px-4 py-3 sm:hidden">
+      <div className="flex items-center justify-between gap-3 bg-white/[0.03] px-4 py-3 sm:hidden">
         <div className="text-base font-bold text-foreground">
           {product.name}
         </div>

@@ -51,10 +51,12 @@ float fbm(vec2 p) {
 
 void main() {
   vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+  float aspect = u_resolution.x / u_resolution.y;
   float t = u_time * 0.2;
 
-  // Gentle organic lean
-  float x = uv.x + 0.06 * sin(uv.y * 3.0 + t * 0.5);
+  // Maintain natural smoke plume aspect ratio matching the ~1.67 baseline (panel & mobile)
+  float scaleX = uv.x * (aspect / 1.667);
+  float x = scaleX + 0.06 * sin(uv.y * 3.0 + t * 0.5);
 
   // Turbulence scrolling upward
   float a = fbm(vec2(x * 2.8, uv.y * 1.8 - t));

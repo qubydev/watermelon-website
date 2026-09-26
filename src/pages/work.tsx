@@ -178,20 +178,22 @@ export default function Work() {
           )}
         </main>
 
-        {/* Ambient smoke effect strictly contained in the footer section below project cards */}
-        <div className="relative mt-auto w-full overflow-hidden">
-          <div
-            className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
-            aria-hidden="true"
-          >
-            <SmokeEffect color="#1A73F2" className="h-full w-full" />
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-background to-transparent" />
-          </div>
+      {/* Ambient smoke effect at the bottom of the page */}
+      <div
+        className="pointer-events-none absolute bottom-0 inset-x-0 z-0 h-80 md:h-96 w-full overflow-hidden"
+        aria-hidden="true"
+      >
+        <SmokeEffect color="#1A73F2" className="h-full w-full" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 hidden md:block md:w-64 lg:w-80 bg-gradient-to-r from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 hidden md:block md:w-64 lg:w-80 bg-gradient-to-l from-background to-transparent" />
+      </div>
 
-          <div className="relative z-10 w-full px-6 pb-6 sm:px-10 lg:px-12">
-            <Footer />
-          </div>
+      <div className="relative z-10 mt-auto w-full px-6 pb-6 sm:px-10 lg:px-12">
+        <div className="mx-auto w-full max-w-4xl">
+          <Footer />
         </div>
+      </div>
     </div>
   )
 }
